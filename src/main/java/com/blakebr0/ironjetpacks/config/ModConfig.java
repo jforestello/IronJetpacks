@@ -8,6 +8,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.Loader;
 
 @EventBusSubscriber(modid = IronJetpacks.MOD_ID)
 public class ModConfig {
@@ -70,5 +71,9 @@ public class ModConfig {
 		if (config.hasChanged()) {
 			config.save();
 		}
+	}
+
+	public static boolean isControllableInstalled() {
+		return Loader.isModLoaded("controllable");
 	}
 }

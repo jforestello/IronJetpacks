@@ -1,5 +1,6 @@
 package com.blakebr0.ironjetpacks.handler;
 
+import com.blakebr0.cucumber.network.NetworkHandler;
 import org.lwjgl.input.Keyboard;
 
 import com.blakebr0.ironjetpacks.IronJetpacks;
@@ -31,7 +32,7 @@ public class KeybindHandler {
 
 	public static KeyBinding keyEngine;
 	public static KeyBinding keyHover;
-	
+
 	public static boolean up = false;
 	public static boolean down = false;
 	public static boolean forwards = false;
@@ -42,7 +43,7 @@ public class KeybindHandler {
 	public static void register() {
 		keyEngine = new KeyBinding("key.ij.engine", Keyboard.KEY_V, IronJetpacks.NAME);
 		keyHover = new KeyBinding("key.ij.hover", Keyboard.KEY_G, IronJetpacks.NAME);
-		
+
 		ClientRegistry.registerKeyBinding(keyEngine);
 		ClientRegistry.registerKeyBinding(keyHover);
 	}
@@ -99,7 +100,7 @@ public class KeybindHandler {
 	public static void onClientTick(ClientTickEvent event) {
 		if (event.phase == Phase.START) {
 			GameSettings settings = Minecraft.getMinecraft().gameSettings;
-			
+
 			boolean upNow = settings.keyBindJump.isKeyDown();
 			boolean downNow = settings.keyBindSneak.isKeyDown();
 			boolean forwardsNow = settings.keyBindForward.isKeyDown();
@@ -114,10 +115,16 @@ public class KeybindHandler {
 				backwards = backwardsNow;
 				left = leftNow;
 				right = rightNow;
-				
-				IronNetwork.INSTANCE.sendToServer(new MessageUpdateInput(upNow, downNow, forwardsNow, backwardsNow, leftNow, rightNow));
-				InputHandler.update(Minecraft.getMinecraft().player, upNow, downNow, forwardsNow, backwardsNow, leftNow, rightNow);
+
+				update(up, down, forwards, backwards, left, right);
 			}
 		}
+	}
+
+	public static void update(boolean up, boolean down, boolean forwards, boolean backwards, boolean left, boolean right) {
+		EntityPlayer player = Minecraft.getMinecraft().player;
+
+		IronNetwork.INSTANCE.sendToServer(new MessageUpdateInput(up, down, forwards, backwards, left, right));
+		InputHandler.update(player, up, down, forwards, backwards, left, right);
 	}
 }

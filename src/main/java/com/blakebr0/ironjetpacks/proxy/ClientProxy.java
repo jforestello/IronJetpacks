@@ -1,5 +1,6 @@
 package com.blakebr0.ironjetpacks.proxy;
 
+import com.blakebr0.ironjetpacks.compact.ControllableCompat;
 import com.blakebr0.ironjetpacks.handler.ColorHandler;
 import com.blakebr0.ironjetpacks.handler.KeybindHandler;
 
@@ -13,6 +14,7 @@ public class ClientProxy extends CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
 		KeybindHandler.register();
+		ControllableCompat.register();
 	}
 	
 	@Override

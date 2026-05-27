@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
         maven { url = "https://maven.minecraftforge.net/" }
     }
@@ -21,6 +22,7 @@ compileJava {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven {
         url = "https://www.cursemaven.com/"
@@ -28,6 +30,7 @@ repositories {
     maven {
         url = "https://maven.blakesmods.com/releases/"
     }
+    maven { url = "https://www.cursemaven.com" }
 }
 
 minecraft {
@@ -49,6 +52,7 @@ dependencies {
     deobfCompile "mezz.jei:jei_1.12.2:4.7.11.102:api"
     runtime "mezz.jei:jei_1.12.2:4.7.11.102"
     deobfCompile "mcp.mobius.waila:Hwyla:1.8.23-B38_1.12"
+    deobfCompile "curse.maven:controllable-317269:3222475"
 }  
 
 processResources {
